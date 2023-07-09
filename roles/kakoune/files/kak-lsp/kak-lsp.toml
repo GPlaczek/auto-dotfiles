@@ -1,0 +1,83 @@
+[language.rust]
+filetypes = ["rust"]
+roots = ["Cargo.toml"]
+command = "rust-analyzer"
+
+[language.c_cpp]
+filetypes = ["c", "h", "cc", "hh", "cpp", "hpp"]
+roots = ["compile-commands.json", ".cquery", "compile_flags.txt"]
+command = "clangd"
+
+[language.latex]
+filetypes = ["latex"]
+roots = [".git"]
+command = "texlab"
+
+[language.python]
+filetypes = ["python"]
+roots = ["setup.py", ".git", ".hg", "requirements.txt"]
+command = "pylsp"
+
+[language.html]
+filetypes = ["html"]
+roots = ["package.json"]
+command = "vscode-html-language-server"
+args = ["--stdio"]
+
+[language.css]
+filetypes = ["css"]
+roots = ["package.json", ".git", ".hg"]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+[language.scss]
+filetypes = ["scss"]
+roots = ["package.json", ".git", ".hg"]
+command = "vscode-css-language-server"
+args = ["--stdio"]
+
+[language.markdown]
+filetypes = ["markdown"]
+roots = ["package.json", ".git", ".hg"]
+command = "vscode-markdown-language-server"
+args = ["--stdio"]
+
+[language.json]
+filetypes = ["json"]
+roots = ["package.json", ".git", ".hg"]
+command = "vscode-json-language-server"
+args = ["--stdio"]
+
+[language.tsx]
+filetypes = ["typescript"]
+roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language.jsx]
+filetypes = ["javascript"]
+roots = ["package.json", "tsconfig.json", ".git", ".hg"]
+command = "typescript-language-server"
+args = ["--stdio"]
+
+[language.php]
+filetypes = ["php"]
+roots = ["composer.json.json", ".htaccess"]
+command = "intelephense"
+args = ["--stdio"]
+settings_section = "intelephense"
+
+[language.php.settings]
+intelephense.storagePath = "/tmp/intelephense"
+
+[language.go]
+filetypes = ["go"]
+roots = ["go.mod", "Gopkg.toml", ".git"]
+command = "gopls"
+# settings_section = "gopls"
+
+[language.bash]
+filetypes = ["sh"]
+roots = [".git", ".hg"]
+command = "bash-language-server"
+args = ["start"]

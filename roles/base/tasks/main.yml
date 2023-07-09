@@ -1,0 +1,8 @@
+- name: Install base packages
+  pacman:
+    name:
+      - git
+      - rsync
+      - base-devel
+      - cmake
+      - sudo

@@ -1,0 +1,62 @@
+- name: Install kakoune pacman
+  ansible.builtin.pacman:
+    name: kakoune
+    state: latest
+
+- name: Ensure config directory exists
+  ansible.builtin.file:
+    name: '{{ host_user_config }}'
+    state: directory
+
+- name: Provide Configuration
+  ansible.posix.synchronize:
+    src: kak
+    dest: '{{ host_user_config }}'
+
+- name: Provide kak-lsp config
+  ansible.posix.synchronize:
+    src: kak-lsp
+    dest: '{{ host_user_config }}'
+
+- name: Ensure kakoune plugins directory
+  file:
+    name: '{{ host_user_config }}/kak/plugins/'
+    state: directory
+
+- name: Ensure kakoune autoload directory
+  file:
+    name: '{{ host_user_config }}/kak/autoload/'
+    state: directory
+
+- name: Default autoload link
+  file:
+    src: /usr/share/kak/autoload
+    dest: '{{ host_user_config }}/kak/autoload/default'
+    state: link
+
+- name: Fetch smarttab
+  git:
+    repo: https://github.com/andreyorst/smarttab.kak
+    dest: '{{ host_user_config }}/kak/plugins/smarttab'
+    version: 86ac6599b13617ff938905ba4cdd8225d7eb6a2e
+    depth: 1
+
+- name: Smarttab autoload link
+  file:
+    src: '{{ host_user_config }}/kak/plugins/smarttab/rc/smarttab.kak'
+    dest: '{{ host_user_config }}/kak/autoload/smarttab.kak'
+    state: link
+
+- name: Install kak-lsp pacman
+  pacman:
+    name: kak-lsp
+    state: latest
+
+- name: Autoload kak-lsp
+  file:
+    src: /usr/share/kak-lsp/rc/lsp.kak
+    dest: /usr/share/kak/autoload/kak-lsp.kak
+    owner: root
+    group: root
+    state: link
+    mode: 755
