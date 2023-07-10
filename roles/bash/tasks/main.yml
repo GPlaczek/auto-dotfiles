@@ -1,0 +1,33 @@
+- name: Ensure bash installed pacman
+  pacman:
+    name: bash
+    state: latest
+
+- name: Ensure config dir
+  file:
+    name: "{{ host_user_config }}/bash"
+    state: directory
+
+- name: Provide bashrc
+  ansible.posix.synchronize:
+    src: .bashrc
+    dest: '{{ host_user_home }}'
+  become: true
+
+- name: Provide autoload source scripts
+  ansible.posix.synchronize:
+    src: autoload
+    dest: '{{ host_user_config }}/bash'
+  become: true
+
+- name: Ensure secrets directory
+  file:
+    name: "{{ host_user_config }}/bash/secrets"
+    state: directory
+
+- name: Provide secrets source scripts
+  ansible.posix.synchronize:
+    src: secrets
+    dest: '{{ host_user_config }}/bash'
+  become: true
+  ignore_errors: true
