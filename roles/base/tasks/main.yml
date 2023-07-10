@@ -6,3 +6,4 @@
       - base-devel
       - cmake
       - sudo
+- include_tasks: user.yml
