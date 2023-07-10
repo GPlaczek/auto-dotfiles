@@ -1,3 +1,4 @@
 host_user_home: '/home/{{ host_user }}'
 host_user_config: '{{ host_user_home }}/.config'
+host_local_bin: '{{ host_user_home }}/.local/bin'
 ansible_become_user: '{{ host_user }}'

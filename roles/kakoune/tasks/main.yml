@@ -3,12 +3,7 @@
     name: kakoune
     state: latest
 
-- name: Ensure config directory exists
-  ansible.builtin.file:
-    name: '{{ host_user_config }}'
-    state: directory
-
-- name: Provide Configuration
+- name: Provide configuration
   ansible.posix.synchronize:
     src: kak
     dest: '{{ host_user_config }}'
@@ -63,3 +58,14 @@
     group: root
     state: link
     mode: 755
+
+- name: Provide kk wrapper
+  ansible.posix.synchronize:
+    src: kk.sh
+    dest: '{{ host_local_bin }}/kk'
+  become: true
+
+- name: Permissions for kk wrapper
+  file:
+    path: '{{ host_local_bin }}/kk'
+    mode: 0755

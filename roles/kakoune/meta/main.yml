@@ -1,3 +1,4 @@
 dependencies:
   - role: rust
   - role: base
+  - role: config_base

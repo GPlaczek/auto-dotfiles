@@ -1,0 +1,15 @@
+- name: Ensure .config exists
+  file:
+    name: '{{ host_user_config }}'
+    state: directory
+
+- name: Ensure .local/bin exists
+  file:
+    name: '{{ host_local_bin }}'
+    state: directory
+
+- name: Add .local/bin to PATH
+  ansible.posix.synchronize:
+    src: path_local.sh
+    dest: '{{ host_user_config }}/bash/autoload/path_local.sh'
+  become: true
