@@ -1,0 +1,19 @@
+- name: Install alacritty pacman
+  pacman:
+    name: alacritty
+    state: latest
+
+- name: Ensure config directories
+  file:
+    name: '{{ host_user_config }}/alacritty'
+    state: directory
+
+- name: Render config config
+  template:
+    src: alacritty.yml.j2
+    dest: '{{ host_user_config }}/alacritty/alacritty.yml'
+
+- name: Provode themes
+  ansible.posix.synchronize:
+    src: themes
+    dest: '{{ host_user_config }}/alacritty/themes/'

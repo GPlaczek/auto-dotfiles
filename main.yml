@@ -5,3 +5,4 @@
       group: grzgrz
   roles:
     - kakoune
+    - alacritty
