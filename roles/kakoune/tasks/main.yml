@@ -12,11 +12,13 @@
   ansible.posix.synchronize:
     src: kak
     dest: '{{ host_user_config }}'
+  become: true
 
 - name: Provide kak-lsp config
   ansible.posix.synchronize:
     src: kak-lsp
     dest: '{{ host_user_config }}'
+  become: true
 
 - name: Ensure kakoune plugins directory
   file:
@@ -40,6 +42,7 @@
     dest: '{{ host_user_config }}/kak/plugins/smarttab'
     version: 86ac6599b13617ff938905ba4cdd8225d7eb6a2e
     depth: 1
+  become: true
 
 - name: Smarttab autoload link
   file:
