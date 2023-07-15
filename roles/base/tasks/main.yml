@@ -1,9 +1,13 @@
 - name: Install base packages
-  pacman:
+  community.general.pacman:
     name:
       - git
       - rsync
       - base-devel
       - sudo
-- include_tasks: user.yml
-- include_tasks: ssh.yml
+
+- name: Setup user
+  ansible.builtin.include_tasks: user.yml
+
+- name: Provide ssh config and keys
+  ansible.builtin.include_tasks: ssh.yml

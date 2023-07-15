@@ -1,17 +1,19 @@
 - name: Install alacritty pacman
-  pacman:
+  community.general.pacman:
     name: alacritty
     state: latest
 
 - name: Ensure config directories
-  file:
+  ansible.builtin.file:
     name: '{{ host_user_config }}/alacritty'
     state: directory
+    mode: '0755'
 
 - name: Render config config
-  template:
+  ansible.builtin.template:
     src: alacritty.yml.j2
     dest: '{{ host_user_config }}/alacritty/alacritty.yml'
+    mode: '0644'
 
 - name: Provode themes
   ansible.posix.synchronize:

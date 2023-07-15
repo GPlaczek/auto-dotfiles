@@ -1,12 +1,13 @@
 - name: Ensure bash installed pacman
-  pacman:
+  community.general.pacman:
     name: bash
-    state: latest
+    state: present
 
 - name: Ensure config dir
-  file:
+  ansible.builtin.file:
     name: "{{ host_user_config }}/bash"
     state: directory
+    mode: '0755'
 
 - name: Provide bashrc
   ansible.posix.synchronize:
@@ -21,13 +22,20 @@
   become: true
 
 - name: Ensure secrets dir
-  file:
+  ansible.builtin.file:
     name: "{{ host_user_config }}/bash/secrets"
     state: directory
+    mode: '0755'
+
+- name: Resolve local secrets scripts
+  delegate_to: localhost
+  ansible.builtin.stat:
+    path: '{{ source_secrets_dir }}/bash'
+  register: secrets
 
 - name: Provide secrets source scripts
   ansible.posix.synchronize:
     src: '{{ source_secrets_dir }}/bash/'
     dest: '{{ host_user_config }}/bash/secrets'
   become: true
-  ignore_errors: true
+  when: secrets.stat.exists

@@ -1,7 +1,7 @@
 - name: Install kakoune pacman
-  ansible.builtin.pacman:
+  community.general.pacman:
     name: kakoune
-    state: latest
+    state: present
 
 - name: Provide configuration
   ansible.posix.synchronize:
@@ -16,23 +16,25 @@
   become: true
 
 - name: Ensure kakoune plugins directory
-  file:
+  ansible.builtin.file:
     name: '{{ host_user_config }}/kak/plugins/'
     state: directory
+    mode: '0755'
 
 - name: Ensure kakoune autoload directory
-  file:
+  ansible.builtin.file:
     name: '{{ host_user_config }}/kak/autoload/'
     state: directory
+    mode: '0755'
 
 - name: Default autoload link
-  file:
+  ansible.builtin.file:
     src: /usr/share/kak/autoload
     dest: '{{ host_user_config }}/kak/autoload/01-default'
     state: link
 
 - name: Fetch smarttab
-  git:
+  ansible.builtin.git:
     repo: https://github.com/andreyorst/smarttab.kak
     dest: '{{ host_user_config }}/kak/plugins/smarttab'
     version: 86ac6599b13617ff938905ba4cdd8225d7eb6a2e
@@ -40,29 +42,29 @@
   become: true
 
 - name: Smarttab autoload link
-  file:
+  ansible.builtin.file:
     src: '{{ host_user_config }}/kak/plugins/smarttab/rc/smarttab.kak'
     dest: '{{ host_user_config }}/kak/autoload/smarttab.kak'
     state: link
 
 - name: Install kak-lsp pacman
-  pacman:
+  community.general.pacman:
     name: kak-lsp
-    state: latest
+    state: present
 
 - name: Autoload kak-lsp
-  file:
+  ansible.builtin.file:
     src: /usr/share/kak-lsp/rc/lsp.kak
     dest: /usr/share/kak/autoload/kak-lsp.kak
     owner: root
     group: root
     state: link
-    mode: 755
-
-- name: kak-lsp source script permissions
-  file:
-    path: /usr/share/kak-lsp/rc/lsp.kak
     mode: '0644'
+
+# - name: Permissions for kak-lsp script
+#   ansible.builtin.file:
+#     path: /usr/share/kak-lsp/rc/lsp.kak
+#     mode: '0644'
 
 - name: Provide kk wrapper
   ansible.posix.synchronize:
@@ -71,6 +73,6 @@
   become: true
 
 - name: Permissions for kk wrapper
-  file:
+  ansible.builtin.file:
     path: '{{ host_local_bin }}/kk'
-    mode: 0755
+    mode: '0755'

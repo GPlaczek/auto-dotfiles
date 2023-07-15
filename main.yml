@@ -1,9 +1,11 @@
-- hosts: all
+- name: Setup Arch distribution
+  hosts: all
   module_defaults:
-    file:
+    ansible.builtin.file:
       owner: '{{ host_user }}'
       group: '{{ host_user }}'
-    copy:
+      mode: '0644'
+    ansible.builtin.copy:
       owner: '{{ host_user }}'
       group: '{{ host_user }}'
   roles:

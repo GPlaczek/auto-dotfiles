@@ -5,11 +5,13 @@
   become: true
 
 - name: Provide private ssh key
-  copy:
+  ansible.builtin.copy:
     src: '{{ private_key_path }}'
     dest: '{{ host_user_home }}/.ssh/'
+    mode: '0600'
 
 - name: Provide public ssh key
-  copy:
+  ansible.builtin.copy:
     src: '{{ public_key_path }}'
     dest: '{{ host_user_home }}/.ssh/'
+    mode: '0644'

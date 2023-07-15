@@ -1,12 +1,14 @@
 - name: Ensure .config exists
-  file:
+  ansible.builtin.file:
     name: '{{ host_user_config }}'
     state: directory
+    mode: '0755'
 
 - name: Ensure .local/bin exists
-  file:
+  ansible.builtin.file:
     name: '{{ host_local_bin }}'
     state: directory
+    mode: '0755'
 
 - name: Add .local/bin to PATH
   ansible.posix.synchronize:

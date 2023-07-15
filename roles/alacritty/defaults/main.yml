@@ -1,2 +1,2 @@
 alacritty:
-  color_scheme: '{{ host_user_config}}/alacritty/themes/breeze.yaml'
+  color_scheme: '{{ host_user_config }}/alacritty/themes/breeze.yaml'

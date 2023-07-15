@@ -1,23 +1,32 @@
+- name: Resolve remote rustup
+  ansible.builtin.stat:
+    path: '{{ host_user_home }}/.rustup'
+  register: rustup_dir
+
 - name: Get rustup install script
-  get_url:
+  ansible.builtin.get_url:
     url: https://sh.rustup.rs
     dest: /tmp/sh.rustup.rs
     mode: '0755'
     force: 'yes'
+  when: not rustup_dir.stat.exists
 
 - name: Install rust/cargo
-  shell: /tmp/sh.rustup.rs -y
+  ansible.builtin.command: /tmp/sh.rustup.rs -y
   become: true
+  changed_when: not rustup_dir.stat.exists
 
 - name: Source cargo environment
-  file:
+  ansible.builtin.file:
     src: '{{ host_user_home }}/.cargo/env'
     dest: '{{ host_user_config }}/bash/autoload/cargo.sh'
     state: link
     mode: '0755'
+  changed_when: not rustup_dir.stat.exists
 
 - name: Install rust-analyzer
   become: true
   environment:
-    - PATH: '{{ ansible_env.PATH }}:{{ host_user_home}}/.cargo/bin'
-  shell: rustup component add rust-analyzer
+    PATH: '{{ ansible_env.PATH }}:{{ host_user_home }}/.cargo/bin'
+  ansible.builtin.command: rustup component add rust-analyzer
+  changed_when: not rustup_dir.stat.exists

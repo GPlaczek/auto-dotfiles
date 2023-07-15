@@ -1,11 +1,11 @@
 - name: Add user group
-  group:
+  ansible.builtin.group:
     name: '{{ host_group }}'
     gid: 1000
     state: present
 
 - name: Add user
-  user:
+  ansible.builtin.user:
     name: '{{ host_user }}'
     uid: 1000
     groups: 'wheel, {{ host_group }}'
