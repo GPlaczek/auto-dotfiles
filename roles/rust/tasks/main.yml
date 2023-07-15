@@ -9,12 +9,14 @@
     dest: /tmp/sh.rustup.rs
     mode: '0755'
     force: 'yes'
+  changed_when: not rustup_dir.stat.exists
   when: not rustup_dir.stat.exists
 
 - name: Install rust/cargo
   ansible.builtin.command: /tmp/sh.rustup.rs -y
   become: true
   changed_when: not rustup_dir.stat.exists
+  when: not rustup_dir.stat.exists
 
 - name: Source cargo environment
   ansible.builtin.file:
@@ -23,6 +25,7 @@
     state: link
     mode: '0755'
   changed_when: not rustup_dir.stat.exists
+  when: not rustup_dir.stat.exists
 
 - name: Install rust-analyzer
   become: true
@@ -30,3 +33,4 @@
     PATH: '{{ ansible_env.PATH }}:{{ host_user_home }}/.cargo/bin'
   ansible.builtin.command: rustup component add rust-analyzer
   changed_when: not rustup_dir.stat.exists
+  when: not rustup_dir.stat.exists
