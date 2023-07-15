@@ -26,3 +26,13 @@
   ansible.builtin.service:
     name: NetworkManager
     enabled: true
+
+- name: Install python packages pacman
+  community.general.pacman:
+    name:
+      - python
+      - python-numpy
+      - python-matplotlib
+      - jupyterlab
+      - python-requests
+    state: present
