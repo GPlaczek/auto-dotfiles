@@ -1,4 +1,3 @@
-source "%val{config}/plugins/kak-lsp"
 lsp-enable
 lsp-auto-hover-enable
 lsp-diagnostics

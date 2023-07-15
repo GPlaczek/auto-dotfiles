@@ -28,7 +28,7 @@
 - name: Default autoload link
   file:
     src: /usr/share/kak/autoload
-    dest: '{{ host_user_config }}/kak/autoload/default'
+    dest: '{{ host_user_config }}/kak/autoload/01-default'
     state: link
 
 - name: Fetch smarttab
@@ -58,6 +58,11 @@
     group: root
     state: link
     mode: 755
+
+- name: kak-lsp source script permissions
+  file:
+    path: /usr/share/kak-lsp/rc/lsp.kak
+    mode: '0644'
 
 - name: Provide kk wrapper
   ansible.posix.synchronize:

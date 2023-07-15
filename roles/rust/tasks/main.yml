@@ -11,6 +11,19 @@
     mode: '0755'
     force: 'yes'
 
-- name: install rust/cargo
+- name: Install rust/cargo
   shell: /tmp/sh.rustup.rs -y
   become: true
+
+- name: Source cargo environment
+  file:
+    src: '{{ host_user_home }}/.cargo/env'
+    dest: '{{ host_user_config }}/bash/autoload/cargo.sh'
+    state: link
+    mode: '0755'
+
+- name: Install rust-analyzer
+  become: true
+  environment:
+    - PATH: '{{ ansible_env.PATH }}:{{ host_user_home}}/.cargo/bin'
+  shell: rustup component add rust-analyzer
