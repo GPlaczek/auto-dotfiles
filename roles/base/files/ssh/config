@@ -1,0 +1,4 @@
+Host localhost
+    Hostname localhost
+    UserKnownHostsFile /dev/null
+    StrictHostKeyChecking no

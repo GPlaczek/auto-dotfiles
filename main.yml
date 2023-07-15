@@ -1,8 +1,11 @@
 - hosts: all
   module_defaults:
     file:
-      owner: grzgrz
-      group: grzgrz
+      owner: '{{ host_user }}'
+      group: '{{ host_user }}'
+    copy:
+      owner: '{{ host_user }}'
+      group: '{{ host_user }}'
   roles:
     - kakoune
     - alacritty

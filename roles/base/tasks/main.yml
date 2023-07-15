@@ -4,6 +4,6 @@
       - git
       - rsync
       - base-devel
-      - cmake
       - sudo
 - include_tasks: user.yml
+- include_tasks: ssh.yml

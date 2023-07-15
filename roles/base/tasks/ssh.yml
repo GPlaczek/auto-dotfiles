@@ -1,0 +1,15 @@
+- name: Provide config
+  ansible.posix.synchronize:
+    src: ssh/
+    dest: '{{ host_user_home }}/.ssh'
+  become: true
+
+- name: Provide private ssh key
+  copy:
+    src: '{{ private_key_path }}'
+    dest: '{{ host_user_home }}/.ssh/'
+
+- name: Provide public ssh key
+  copy:
+    src: '{{ public_key_path }}'
+    dest: '{{ host_user_home }}/.ssh/'

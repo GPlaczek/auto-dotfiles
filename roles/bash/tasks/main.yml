@@ -20,14 +20,14 @@
     dest: '{{ host_user_config }}/bash'
   become: true
 
-- name: Ensure secrets directory
+- name: Ensure secrets dir
   file:
     name: "{{ host_user_config }}/bash/secrets"
     state: directory
 
 - name: Provide secrets source scripts
   ansible.posix.synchronize:
-    src: secrets
-    dest: '{{ host_user_config }}/bash'
+    src: '{{ source_secrets_dir }}/bash/'
+    dest: '{{ host_user_config }}/bash/secrets'
   become: true
   ignore_errors: true

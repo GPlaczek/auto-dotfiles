@@ -9,6 +9,3 @@
     name: '{{ host_user }}'
     uid: 1000
     groups: 'wheel,{{ host_group }}'
-    generate_ssh_key: yes
-    ssh_key_type: ed25519
-    password: 12345
