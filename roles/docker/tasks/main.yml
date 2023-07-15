@@ -1,0 +1,33 @@
+- name: Install docker pacman
+  pacman:
+    name:
+      - docker
+      - docker-compose
+    state: latest
+
+- name: Enable docker service
+  service:
+    name: docker
+    enabled: true
+    state: started
+
+- name: Pull debian docker image
+  docker_image:
+    name: 'debian:bookworm'
+    source: pull
+
+- name: Pull alpine docker image
+  docker_image:
+    name: 'alpine:latest'
+    source: pull
+
+- name: Add docker user group
+  group:
+    name: docker
+    state: present
+
+- name: Add user to docker group
+  user:
+    append: true
+    name: '{{ host_user }}'
+    groups: docker

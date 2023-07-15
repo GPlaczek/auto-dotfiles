@@ -8,4 +8,5 @@
   user:
     name: '{{ host_user }}'
     uid: 1000
-    groups: 'wheel,{{ host_group }}'
+    groups: 'wheel, {{ host_group }}'
+    append: true

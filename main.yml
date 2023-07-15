@@ -10,3 +10,5 @@
     - kakoune
     - alacritty
     - bash
+    - docker
+    - rust
