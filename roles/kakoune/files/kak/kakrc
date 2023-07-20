@@ -1,5 +1,7 @@
 set -add global ui_options terminal_enable_mouse=false
 
+cursorline
+
 hook global BufOpenFile .* expandtab
 hook global BufNewFile .* expandtab
 

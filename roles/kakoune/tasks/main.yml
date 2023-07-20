@@ -44,7 +44,28 @@
 - name: Smarttab autoload link
   ansible.builtin.file:
     src: '{{ host_user_config }}/kak/plugins/smarttab/rc/smarttab.kak'
-    dest: '{{ host_user_config }}/kak/autoload/smarttab.kak'
+    dest: '{{ host_user_config }}/kak/autoload/05-smarttab.kak'
+    state: link
+
+- name: Fetch crosshairs
+  ansible.builtin.git:
+    repo: https://github.com/insipx/kak-crosshairs
+    dest: '{{ host_user_config }}/kak/plugins/kak-crosshairs'
+    version: 7edba13c535ce1bc67356b1c9461f5d261949d29
+    depth: 1
+  become: true
+
+- name: Patch crosshairs
+  ansible.posix.patch:
+    src: no_bold.patch
+    dest: '{{ host_user_config }}/kak/plugins/kak-crosshairs/croshairs.kak'
+    state: present
+  become: true
+
+- name: Crosshairs symlink
+  ansible.builtin.file:
+    src: '{{ host_user_config }}/kak/plugins/kak-crosshairs/crosshairs.kak'
+    dest: '{{ host_user_config }}/kak/autoload/02-crosshairs.kak'
     state: link
 
 - name: Install kak-lsp pacman
