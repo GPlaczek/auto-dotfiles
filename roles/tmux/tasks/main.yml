@@ -1,0 +1,26 @@
+- name: Install tmux pacman
+  community.general.pacman:
+    name: tmux
+    state: present
+
+- name: Provide config
+  ansible.posix.synchronize:
+    src: tmux
+    dest: '{{ host_user_config }}'
+  become: true
+
+- name: Fetch tmux-pain-control
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-pain-control
+    dest: '{{ host_user_config }}/tmux/plugins/tmux-pain-control'
+    version: 32b760f6652f2305dfef0acd444afc311cf5c077
+    depth: 1
+  become: true
+
+- name: Fetch tmux-sensible
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tmux-sensible
+    dest: '{{ host_user_config }}/tmux/plugins/tmux-sensible'
+    version: 25cb91f42d020f675bb0a2ce3fbd3a5d96119efa
+    depth: 1
+  become: true

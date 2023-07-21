@@ -15,3 +15,4 @@
     - docker
     - rust
     - misc_devtools
+    - tmux
