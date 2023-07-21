@@ -6,6 +6,8 @@
       - qemu-system-x86
       - qemu-tools
       - apptainer
+      - strace
+      - gdb
     state: present
 
 - name: Install modern unix tools
@@ -46,4 +48,14 @@
       - go
       - gopls
       - go-tools
+    state: present
+
+- name: Install C/C++ tools
+  community.general.pacman:
+    name:
+      - clang
+      - cmake
+      - ninja-build
+      - make
+      - valgrind
     state: present
