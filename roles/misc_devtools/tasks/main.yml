@@ -31,6 +31,9 @@
   community.general.pacman:
     name:
       - python
+      - python-setuptools
+      - python-lsp-server
+      - python-pip
       - python-numpy
       - python-matplotlib
       - jupyterlab
