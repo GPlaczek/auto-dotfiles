@@ -39,3 +39,11 @@
       - jupyterlab
       - python-requests
     state: present
+
+- name: Install golang packages pacman
+  community.general.pacman:
+    name:
+      - go
+      - gopls
+      - go-tools
+    state: present
