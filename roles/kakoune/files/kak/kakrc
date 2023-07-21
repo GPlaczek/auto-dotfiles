@@ -5,6 +5,8 @@ cursorline
 hook global BufOpenFile .* expandtab
 hook global BufNewFile .* expandtab
 
+source "%val{config}/lsp.kak"
+
 hook global WinSetOption filetype=(makefile|gas|bash|lisp|go) %{
     set buffer tabstop 4
     noexpandtab
