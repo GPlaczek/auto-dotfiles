@@ -8,6 +8,8 @@
     ansible.builtin.copy:
       owner: '{{ host_user }}'
       group: '{{ host_user }}'
+    ansible.posix.synchronize:
+      delete: true
   roles:
     - kakoune
     - alacritty
