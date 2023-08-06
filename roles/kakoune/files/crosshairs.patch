@@ -1,0 +1,31 @@
+diff --git a/crosshairs.kak b/crosshairs.kak
+index 514e37b..22e7c2c 100644
+--- a/crosshairs.kak
++++ b/crosshairs.kak
+@@ -1,5 +1,5 @@
+-set-face global crosshairs_line default,rgb:383838+bd
+-set-face global crosshairs_column default,rgb:383838+bd
++set-face global crosshairs_line default,rgb:383838
++set-face global crosshairs_column default,rgb:383838
+ 
+ # Whether to print debug information during runtime
+ declare-option -hidden bool highlight_debug
+@@ -81,14 +81,14 @@ define-command -override cursorcolumn-disable -docstring "Disable highlighting f
+ 
+ define-command -override -hidden -docstring "Move the line highlither" \
+ update-line-highlither %{
+-    try %{ remove-highlighter window/crosshairs-line }
+-    try %{ add-highlighter window/crosshairs-line line %val{cursor_line} crosshairs_line }
++    try %{ remove-highlighter buffer/crosshairs-line }
++    try %{ add-highlighter buffer/crosshairs-line line %val{cursor_line} crosshairs_line }
+ }
+ 
+ define-command -override -hidden -docstring "Move the column highlither" \
+ update-column-highlither %{
+-    try %{ remove-highlighter window/crosshairs-column }
+-    try %{ add-highlighter window/crosshairs-column column %val{cursor_display_column} crosshairs_column }
++    try %{ remove-highlighter buffer/crosshairs-column }
++    try %{ add-highlighter buffer/crosshairs-column column %val{cursor_display_column} crosshairs_column }
+ }
+ 
+ define-command -override -hidden -docstring "Add/remove crosshairs drawing hook" \

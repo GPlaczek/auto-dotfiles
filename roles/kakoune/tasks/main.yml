@@ -62,7 +62,7 @@
 
 - name: Patch crosshairs
   ansible.posix.patch:
-    src: no_bold.patch
+    src: crosshairs.patch
     dest: '{{ host_user_config }}/kak/plugins/kak-crosshairs/crosshairs.kak'
     state: present
   become: true
