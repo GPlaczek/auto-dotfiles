@@ -1,0 +1,13 @@
+- name: Install gnome packages pacman
+  community.general.pacman:
+    name:
+      - gdm
+      - wayland
+      - gnome
+      - gnome-tweaks
+      - firefox
+
+- name: Enable gdm service
+  ansible.builtin.service:
+    name: gdm
+    enabled: true
