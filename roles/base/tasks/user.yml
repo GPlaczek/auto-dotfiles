@@ -4,6 +4,19 @@
     gid: 1000
     state: present
 
+- name: Add wheel group
+  ansible.builtin.group:
+    name: wheel
+    state: present
+
+- name: Allow sudo for wheel group
+  ansible.builtin.lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: '^%wheel'
+    line: '%wheel ALL=(ALL) ALL'
+    validate: 'visudo -cf %s'
+
 - name: Add user
   ansible.builtin.user:
     name: '{{ host_user }}'
