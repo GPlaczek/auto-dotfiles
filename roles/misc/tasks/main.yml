@@ -16,6 +16,7 @@
       - ripgrep
       - fzf
       - fff
+      - tig
     state: present
 
 - name: Install networking tools
