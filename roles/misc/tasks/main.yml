@@ -23,6 +23,7 @@
     name:
       - iproute2
       - networkmanager
+      - netcat
 
 - name: Enable network manager service
   ansible.builtin.service:
@@ -55,10 +56,23 @@
     name:
       - clang
       - cmake
-      - ninja-build
+      - ninja
       - make
       - valgrind
     state: present
+
+- name: Add AUR user
+ ansible.builtin.user:
+   name: aur_builder
+   group: wheel
+
+- name: Add aur_builder to sudoers
+ ansible.builtin.lineinfile:
+   path: /etc/sudoers.d/11-install-aur_builder
+   line: 'aur_builder ALL=(ALL) NOPASSWD: /usr/bin/pacman'
+   create: yes
+   mode: 0644
+   validate: 'visudo -cf %s'
 
 - name: Install CLI graphics tools
   community.general.pacman:
@@ -67,3 +81,11 @@
       - ffmpeg
       - libheif
     state: present
+
+- name: Install yay AUR
+  vars:
+    ansible_become_user: aur_builder
+  kewlfft.aur.aur:
+    name: yay
+    state: present
+  become: true

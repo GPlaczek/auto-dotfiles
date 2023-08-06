@@ -14,5 +14,5 @@
     - bash
     - docker
     - rust
-    - misc_devtools
+    - misc
     - tmux
