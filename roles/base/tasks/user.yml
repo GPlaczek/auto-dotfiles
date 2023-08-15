@@ -20,6 +20,7 @@
 - name: Add user
   ansible.builtin.user:
     name: '{{ host_user }}'
+    password: "{{ host_user_passwd | password_hash('sha512') }}"
     uid: 1000
     groups: 'wheel, {{ host_group }}'
     append: true
