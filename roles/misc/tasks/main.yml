@@ -19,11 +19,6 @@
       - tig
     state: present
 
-- name: Enable network manager service
-  ansible.builtin.service:
-    name: NetworkManager
-    enabled: true
-
 - name: Install python packages pacman
   community.general.pacman:
     name:

@@ -13,3 +13,8 @@
   community.general.ufw:
     state: enabled
     policy: allow
+
+- name: Enable network manager
+  ansible.builtin.service:
+    name: NetworkManager
+    enabled: true
